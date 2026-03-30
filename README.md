@@ -2,19 +2,19 @@ markdown# 🚀 My Epick Book — Production DevOps Project on AWS
 
 
 
-!\[AWS](https://img.shields.io/badge/AWS-EKS-orange)
+\[AWS](https://img.shields.io/badge/AWS-EKS-orange)
 
-!\[Kubernetes](https://img.shields.io/badge/Kubernetes-v1.34.4-blue)
+\[Kubernetes](https://img.shields.io/badge/Kubernetes-v1.34.4-blue)
 
-!\[Helm](https://img.shields.io/badge/Helm-v4.1.3-green)
+\[Helm](https://img.shields.io/badge/Helm-v4.1.3-green)
 
-!\[Istio](https://img.shields.io/badge/Istio-v1.29.1-purple)
+\[Istio](https://img.shields.io/badge/Istio-v1.29.1-purple)
 
-!\[CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-black)
+\[CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-black)
 
-!\[Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-red)
+\[Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-red)
 
-!\[Grafana](https://img.shields.io/badge/Visualisation-Grafana-orange)
+\[Grafana](https://img.shields.io/badge/Visualisation-Grafana-orange)
 
 
 
@@ -22,7 +22,7 @@ markdown# 🚀 My Epick Book — Production DevOps Project on AWS
 
 
 
-\## 📌 Overview
+📌 Overview
 
 
 
@@ -30,19 +30,17 @@ A production-grade DevOps project built from scratch on AWS EKS.
 
 This project demonstrates the full DevOps lifecycle —
 
-from containerisation to deployment, CI/CD automation,
+from containerization to deployment, CI/CD automation,
 
 service mesh security, and production monitoring with custom alerts.
 
 
 
-\---
 
 
+🏗️ Architecture
 
-\## 🏗️ Architecture
 
-```
 
 Developer (git push)
 
@@ -100,15 +98,15 @@ GitHub Actions CI/CD
 
 &#x20;           └── Alertmanager → Slack
 
-```
 
 
 
-\---
 
 
 
-\## 🛠️ Tech Stack
+
+
+🛠️ Tech Stack
 
 
 
@@ -116,39 +114,39 @@ GitHub Actions CI/CD
 
 |-----------|---------|
 
-| \*\*AWS EKS\*\* | Managed Kubernetes cluster |
+| \*AWS EKS\*     | Managed Kubernetes cluster  |
 
-| \*\*Amazon ECR\*\* | Private container registry |
+| \*Amazon ECR\*  | Private container registry  |
 
-| \*\*Docker\*\* | Application containerisation |
+| \*Docker\*      | Application containerization|
 
-| \*\*Kubernetes\*\* | Container orchestration |
+| \*Kubernetes\*  | Container orchestration |
 
-| \*\*Helm\*\* | Kubernetes package manager |
+| \*Helm\*\*        | Kubernetes package manager |
 
-| \*\*GitHub Actions\*\* | CI/CD pipeline automation |
+| \*GitHub Actions| CI/CD pipeline automation  |
 
-| \*\*Istio\*\* | Service mesh \& mTLS encryption |
+| \*Istio\*        | Service mesh \& mTLS encryption|
 
-| \*\*Prometheus\*\* | Metrics collection \& storage |
+| \*Prometheus\*   | Metrics collection \& storage  |
 
-| \*\*Grafana\*\* | Metrics visualisation |
+| \*Grafana\*      | Metrics visualisation   |
 
-| \*\*Alertmanager\*\* | Alert routing to Slack |
+| \*Alertmanager\* | Alert routing to Slack  |
 
-| \*\*eksctl\*\* | EKS cluster provisioning |
+| \*eksctl\*       | EKS cluster provisioning|
 
-| \*\*AWS CLI\*\* | AWS account management |
-
-
-
-\---
+| \*AWS CLI\*      | AWS account management  |
 
 
 
-\## 📁 Project Structure
 
-```
+
+
+
+📁 Project Structure
+
+
 
 my-epick-book/
 
@@ -184,21 +182,21 @@ my-epick-book/
 
 └── README.md
 
-```
 
 
 
-\---
 
 
 
-\## 🚀 Getting Started
+
+
+🚀 Getting Started
 
 
 
-\### Prerequisites
+&#x20;>Prerequisites
 
-```bash
+bash
 
 \# Install AWS CLI
 
@@ -226,13 +224,13 @@ eksctl version
 
 helm version
 
-```
 
 
 
-\### Configure AWS
 
-```bash
+>Configure AWS
+
+bash
 
 aws configure
 
@@ -242,9 +240,9 @@ aws configure
 
 
 
-\### Create EKS Cluster
+> Create EKS Cluster
 
-```bash
+bash
 
 eksctl create cluster \\
 
@@ -268,9 +266,9 @@ eksctl create cluster \\
 
 
 
-\### Create ECR Repository
+>Create ECR Repository
 
-```bash
+bash
 
 aws ecr create-repository \\
 
@@ -278,13 +276,13 @@ aws ecr create-repository \\
 
 \--region eu-north-1
 
-```
 
 
 
-\### Build \& Push to ECR
 
-```bash
+>Build \& Push to ECR
+
+bash
 
 \# Login to ECR
 
@@ -312,9 +310,9 @@ docker push \\
 
 
 
-\### Deploy with Helm
+\# Deploy with Helm
 
-```bash
+bash
 
 helm install epick-book ./epick-book-chart
 
@@ -322,29 +320,29 @@ kubectl get pods
 
 kubectl get svc
 
-```
 
 
 
-\---
 
 
 
-\## 🔄 CI/CD Pipeline
+
+
+🔄 CI/CD Pipeline
 
 
 
 The GitHub Actions pipeline triggers automatically on every push to `main`:
 
-```
+
 
 git push → Build Docker image → Push to ECR → Deploy to EKS → Verify
 
-```
 
 
 
-\### Required GitHub Secrets
+
+&#x20;Required GitHub Secrets
 
 
 
@@ -352,29 +350,29 @@ git push → Build Docker image → Push to ECR → Deploy to EKS → Verify
 
 |--------|-------------|
 
-| `AWS\_ACCESS\_KEY\_ID` | AWS access key |
+| `AWS\_ACCESS\_KEY\_ID`         | AWS access key |
 
-| `AWS\_SECRET\_ACCESS\_KEY` | AWS secret key |
+| `AWS\_SECRET\_ACCESS\_KEY`     | AWS secret key |
 
-| `AWS\_REGION` | `eu-north-1` |
+| `AWS\_REGION`                | `eu-north-1` |
 
-| `ECR\_REPOSITORY` | `my-epick-book` |
+| `ECR\_REPOSITORY`            | `my-epick-book` |
 
-| `EKS\_CLUSTER\_NAME` | `epick-book-cluster` |
-
-
-
-\---
+| `EKS\_CLUSTER\_NAME`          | `epick-book-cluster` |
 
 
 
-\## 🕸️ Istio Service Mesh
 
 
 
-\### Install Istio
 
-```bash
+🕸️ Istio Service Mesh
+
+
+
+&#x20;>Install Istio
+
+bash
 
 curl -L https://istio.io/downloadIstio | sh -
 
@@ -388,21 +386,20 @@ istioctl install --set profile=demo -y
 
 
 
-\### Enable Sidecar Injection
+&#x20;>Enable Sidecar Injection
 
-```bash
+bash
 
 kubectl label namespace default istio-injection=enabled
 
 kubectl rollout restart deployment/epick-book-epick-book
 
-```
 
 
 
-\### Enable mTLS STRICT Mode
+> Enable mTLS STRICT Mode
 
-```bash
+bash
 
 kubectl apply -f - <<EOF
 
@@ -428,9 +425,9 @@ EOF
 
 
 
-\### Canary Deployment (80/20 Split)
+&#x20;>Canary Deployment (80/20 Split)
 
-```bash
+bash
 
 kubectl apply -f - <<EOF
 
@@ -478,21 +475,21 @@ spec:
 
 EOF
 
-```
 
 
 
-\---
 
 
 
-\## 📊 Monitoring \& Alerting
+
+
+📊 Monitoring \& Alerting
 
 
 
-\### Install Prometheus \& Grafana
+> Install Prometheus \& Grafana
 
-```bash
+bash
 
 kubectl create namespace monitoring
 
@@ -520,7 +517,7 @@ prometheus-community/kube-prometheus-stack \\
 
 
 
-\### Get Grafana Password
+>Get Grafana Password
 
 ```bash
 
@@ -530,13 +527,13 @@ kubectl get secret monitoring-grafana \\
 
 \-o jsonpath="{.data.admin-password}" | base64 --decode
 
-```
 
 
 
-\### Custom Alert Rules
 
-```yaml
+>Custom Alert Rules
+
+yaml
 
 apiVersion: monitoring.coreos.com/v1
 
@@ -606,15 +603,13 @@ spec:
 
 &#x20;           summary: "High memory usage detected"
 
-```
 
 
 
-\---
 
 
 
-\## ⚠️ Cleanup
+⚠️ Cleanup
 
 
 
@@ -628,17 +623,13 @@ eksctl delete cluster \\
 
 \--region eu-north-1
 
-```
 
 
 
-\---
+
+&#x20;📈 Project Outcomes
 
 
-
-\## 📈 Project Outcomes
-
-```
 
 ✅ Production EKS cluster on AWS
 
@@ -660,11 +651,11 @@ eksctl delete cluster \\
 
 
 
-\---
 
 
 
-\## 🧠 Key Learnings
+
+🧠 Key Learnings
 
 
 
@@ -688,11 +679,11 @@ eksctl delete cluster \\
 
 
 
-\---
 
 
 
-\## 👨‍💻 Author
+
+&#x20;👨‍💻 Author
 
 
 
@@ -704,7 +695,7 @@ eksctl delete cluster \\
 
 
 
-\---
+
 
 
 
