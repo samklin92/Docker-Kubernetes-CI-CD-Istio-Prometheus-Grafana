@@ -1,4 +1,4 @@
-name: CI/CD Pipeline — My Epick Book
+name: CI/CD — My Epick Book on AWS EKS
 
 on:
   push:
@@ -6,52 +6,46 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build & Push Docker Image
+  build-and-deploy:
+    name: Build, Push & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Build Docker Image
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build & Push Image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker build -t samklin92/my-epick-book:${{ github.sha }} ./app
-          docker tag samklin92/my-epick-book:${{ github.sha }} samklin92/my-epick-book:latest
+          docker build -t $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }} ./app
+          docker push $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
 
-      - name: Push Docker Image
+      - name: Update kubeconfig for EKS
         run: |
-          docker push samklin92/my-epick-book:${{ github.sha }}
-          docker push samklin92/my-epick-book:latest
+          aws eks update-kubeconfig \
+          --name ${{ secrets.EKS_CLUSTER_NAME }} \
+          --region ${{ secrets.AWS_REGION }}
 
-  deploy:
-    name: Deploy to Kubernetes
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Configure Kubernetes credentials
+      - name: Deploy to EKS with Helm
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+          helm upgrade --install epick-book ./epick-book-chart \
+          --set image.repository=$ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }} \
+          --set image.tag=${{ github.sha }}
 
-      - name: Deploy to Kubernetes
+      - name: Verify Deployment
         run: |
-          kubectl set image deployment/my-epick-book \
-          my-epick-book=samklin92/my-epick-book:${{ github.sha }}
-
-      - name: Verify Rollout
-        run: |
-          kubectl rollout status deployment/my-epick-book
+          kubectl rollout status deployment/epick-book-epick-book
