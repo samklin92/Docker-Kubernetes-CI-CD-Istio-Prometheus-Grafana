@@ -1,229 +1,334 @@
-# 👨‍💻 Ogaji Igwe Samuel 
-### 🚀 Production DevOps Platform on AWS — *My Epick Book*
+# Kubernetes Delivery Platform 🚀
+
+Production-grade cloud-native delivery platform built on Kubernetes and AWS.
+
+This project demonstrates how modern engineering teams build, deploy, secure, and observe scalable applications using production-focused DevOps and platform engineering practices.
+
+Designed and built by Ogaji Igwe Samuel.
+
+<img width="1536" height="1024" alt="DevOps architecture" src="https://github.com/user-attachments/assets/b7978578-0bb6-4468-905b-2f493447f988" />
+
 
 ---
 
-## 🎯 Project Purpose
+# Project Overview
 
-This project was designed and built by **Ogaji Igwe Samuel** to simulate a real-world production DevOps environment.
+`kubernetes-delivery-platform` is a production-style Kubernetes platform running on Amazon EKS with automated CI/CD, service mesh security, canary deployments, and full-stack observability.
 
-It demonstrates how modern engineering teams design, deploy, secure, and monitor applications at scale using cloud-native tools and best practices.
-
-The goal of this project is to:
-
-- Showcase end-to-end DevOps capabilities (build → deploy → monitor)  
-- Demonstrate production-grade Kubernetes operations on AWS  
-- Implement secure microservices communication using a service mesh  
-- Automate deployments using CI/CD and GitOps principles  
-- Provide full observability with monitoring and alerting  
+The platform simulates a real-world engineering environment where deployments are automated, services are secured with mTLS, traffic is intelligently managed, and operational visibility is built into the infrastructure from day one.
 
 ---
 
-## 🚀 TL;DR
+# Key Features
 
-A production-ready cloud platform featuring:
-
-- Kubernetes cluster on Amazon EKS  
-- CI/CD automation with GitHub Actions  
-- Dockerized application deployed via Helm  
-- Service mesh with Istio (mTLS enabled)  
-- Canary deployments (traffic splitting)  
-- Monitoring with Prometheus & Grafana  
-- Alerting via Alertmanager → Slack  
-
----
-
-## 🧰 Tech Stack
-
-### ☁️ Cloud Platform
-- AWS (EKS, ECR, IAM, VPC)
-
-### ☸️ Container Orchestration
-- Kubernetes (Amazon EKS)
-
-### 📦 Containerization
-- Docker
-
-### 🔄 CI/CD & Automation
-- GitHub Actions (pipeline automation)
-
-### 📦 Package Management
-- Helm (Kubernetes package manager)
-
-### 🕸️ Service Mesh & Security
-- Istio (mTLS, traffic routing, canary deployments)
-
-### 📊 Monitoring & Observability
-- Prometheus (metrics collection)  
-- Grafana (visualization dashboards)  
-- Alertmanager (alert routing to Slack)  
-
-### 🛠️ CLI & Tooling
-- AWS CLI  
-- eksctl  
-- kubectl  
+✅ Amazon EKS Kubernetes Cluster  
+✅ GitHub Actions CI/CD Automation  
+✅ Dockerized Application Deployment  
+✅ Helm-based Kubernetes Packaging  
+✅ Istio Service Mesh with mTLS  
+✅ Canary Deployments with Traffic Splitting  
+✅ Prometheus Metrics Collection  
+✅ Grafana Dashboards & Visualization  
+✅ Alertmanager Integration with Slack  
+✅ Production-style Kubernetes Architecture  
 
 ---
 
+# Architecture Overview
 
-
-## 🏗️ Architecture Overview
+```text
 Developer (git push)
-↓
-GitHub Actions CI/CD
-↓
-Build → Push (ECR) → Deploy (Helm)
-↓
+        ↓
+GitHub Actions CI/CD Pipeline
+        ↓
+Build Docker Image
+        ↓
+Push Image → Amazon ECR
+        ↓
+Helm Deployment
+        ↓
 Amazon EKS Cluster
-├── Application Pods (nginx)
-├── Istio Service Mesh (mTLS + traffic control)
-└── Monitoring Stack (Prometheus + Grafana + Alertmanager)
+ ├── Application Pods
+ ├── Istio Service Mesh
+ │     ├── mTLS Encryption
+ │     ├── Traffic Routing
+ │     └── Canary Releases
+ │
+ └── Observability Stack
+       ├── Prometheus
+       ├── Grafana
+       └── Alertmanager → Slack
+```
 
 ---
 
-## 🧱 Core Components
+# Platform Architecture
 
-### ☁️ Cloud Infrastructure
-- Amazon EKS cluster deployed in AWS  
-- Amazon ECR for container image storage  
+## CI/CD Pipeline
 
----
+The deployment workflow is fully automated using GitHub Actions.
 
-### 🔄 CI/CD Pipeline
-- Automated build and deployment pipeline:
-  - Build Docker image  
-  - Push to ECR  
-  - Deploy to EKS using Helm  
+### Pipeline Flow
 
----
+```text
+git push
+   ↓
+GitHub Actions
+   ↓
+Docker Build
+   ↓
+Push to Amazon ECR
+   ↓
+Helm Upgrade / Install
+   ↓
+Deploy to Amazon EKS
+   ↓
+Health Verification
+```
 
-### ☸️ Kubernetes Deployment
-- Helm chart for application deployment  
-- Scalable nginx-based application  
-- Kubernetes services exposed via LoadBalancer  
-
----
-
-### 🕸️ Service Mesh (Istio)
-- Automatic sidecar injection (Envoy proxies)  
-- mTLS encryption in STRICT mode  
-- Traffic routing using VirtualService  
-- Canary deployments with traffic splitting  
+The pipeline eliminates manual deployments and ensures repeatable infrastructure delivery.
 
 ---
 
-### 📊 Monitoring & Alerting
-- Prometheus for metrics collection  
-- Grafana dashboards for visualization  
-- Alertmanager integrated with Slack  
-- Custom alerts for CPU, memory, and pod health  
+# Infrastructure Stack
+
+| Category | Technology |
+|---|---|
+| Cloud Platform | AWS |
+| Kubernetes | Amazon EKS |
+| Containerization | Docker |
+| CI/CD | GitHub Actions |
+| Package Management | Helm |
+| Service Mesh | Istio |
+| Monitoring | Prometheus |
+| Visualization | Grafana |
+| Alerting | Alertmanager + Slack |
+| Container Registry | Amazon ECR |
+| CLI Tooling | kubectl, eksctl, AWS CLI |
 
 ---
 
-## 📁 Project Structure
-my-epick-book/
-├── app/ # Application source code
-│ ├── index.html
-│ └── Dockerfile
+# Kubernetes & Service Mesh
+
+The platform uses Amazon EKS for orchestration and Istio for advanced traffic management and service-to-service security.
+
+## Implemented Features
+
+- Kubernetes deployments and services
+- Helm-based application packaging
+- Automatic Istio sidecar injection
+- STRICT mTLS encryption
+- VirtualService traffic routing
+- Canary deployments with traffic splitting
+- Scalable container workloads
+
+---
+
+# Observability Stack
+
+Operational visibility is a core part of the platform architecture.
+
+## Monitoring
+
+### Prometheus
+- Metrics collection
+- Service discovery
+- Alert rules
+
+### Grafana
+- Real-time dashboards
+- Infrastructure visualization
+- Kubernetes metrics analysis
+
+### Alertmanager
+- Alert routing
+- Notification grouping
+- Slack integration
+
+---
+
+# Alerts Configured
+
+The platform includes operational alerts for:
+
+- High CPU usage
+- High memory utilization
+- Pod restarts
+- Kubernetes health degradation
+- Application availability issues
+
+---
+
+# Repository Structure
+
+```text
+kubernetes-delivery-platform/
 │
-├── epick-book-chart/ # Helm chart
-│ ├── Chart.yaml
-│ ├── values.yaml
-│ └── templates/
-│ ├── deployment.yaml
-│ └── service.yaml
+├── app/
+│   ├── index.html
+│   └── Dockerfile
 │
-├── .github/workflows/ # CI/CD pipeline
-│ └── deploy.yaml
+├── kubernetes-delivery-chart/
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   └── templates/
+│       ├── deployment.yaml
+│       └── service.yaml
+│
+├── istio/
+│   ├── gateway.yaml
+│   ├── virtualservice.yaml
+│   └── destinationrule.yaml
+│
+├── monitoring/
+│   ├── prometheus/
+│   ├── grafana/
+│   └── alertmanager/
+│
+├── .github/workflows/
+│   └── deploy.yaml
 │
 └── README.md
+```
 
 ---
 
-## 🚀 Deployment Workflow
+# Deployment Guide
 
-1. Configure AWS  
+## 1. Configure AWS
 
+```bash
 aws configure
+```
 
+---
 
-2. Create EKS cluster  
+## 2. Create EKS Cluster
 
-eksctl create cluster
---name epick-book-cluster
---region eu-north-1
---nodegroup-name epick-book-nodes
---node-type t3.medium
---nodes 2
---nodes-min 1
---nodes-max 3
---managed
+```bash
+eksctl create cluster \
+  --name kubernetes-delivery-cluster \
+  --region eu-north-1 \
+  --nodegroup-name platform-nodes \
+  --node-type t3.medium \
+  --nodes 2 \
+  --nodes-min 1 \
+  --nodes-max 3 \
+  --managed
+```
 
+---
 
-3. Build & push Docker image  
+## 3. Build Docker Image
 
-docker build -t my-epick-book:v1.0 ./app
+```bash
+docker build -t kubernetes-delivery-platform:v1.0 ./app
+```
+
+---
+
+## 4. Push Image to Amazon ECR
+
+```bash
 docker push <ECR_URL>
-
-
-4. Deploy with Helm  
-
-helm install epick-book ./epick-book-chart
-
+```
 
 ---
 
-## 🔄 CI/CD Workflow
+## 5. Deploy with Helm
 
-
-git push → build → push → deploy → verify
-
-
----
-
-## 📊 Monitoring & Alerts
-
-- Real-time metrics via Prometheus  
-- Grafana dashboards for visualization  
-- Alerts triggered for:
-  - High CPU usage  
-  - High memory usage  
-  - Pod restarts  
+```bash
+helm install kubernetes-delivery ./kubernetes-delivery-chart
+```
 
 ---
 
-## 🧹 Cleanup
+# CI/CD Workflow
 
-
-eksctl delete cluster
---name epick-book-cluster
---region eu-north-1
-
-
----
-
-## 📈 Project Outcomes
-
-- Production-ready Kubernetes platform on AWS  
-- Fully automated CI/CD pipeline  
-- Secure service-to-service communication (mTLS)  
-- Canary deployments with traffic control  
-- Real-time monitoring and alerting  
-
----
-
-## 🧠 Key Learnings
-
-- Kubernetes enables scalable production systems  
-- CI/CD removes manual deployment risks  
-- Service mesh enhances security and traffic control  
-- Observability is essential for reliability  
-- Debugging is a critical DevOps skill  
+```text
+Code Commit
+    ↓
+GitHub Actions Pipeline
+    ↓
+Container Build
+    ↓
+Amazon ECR Push
+    ↓
+Helm Deployment
+    ↓
+Amazon EKS Rollout
+    ↓
+Istio Traffic Routing
+    ↓
+Prometheus Monitoring
+    ↓
+Alertmanager Notifications
+```
 
 ---
 
-## 👨‍💻 Author
+# Security Features
 
-**Ogaji Igwe Samuel**  
-- GitHub: https://github.com/samklin92  
-- LinkedIn: https://linkedin.com/in/samklin92  
+The platform includes multiple production-style security controls:
+
+- mTLS encryption via Istio
+- Kubernetes network isolation
+- Private container registry (ECR)
+- IAM-based AWS authentication
+- Kubernetes secrets management
+- Controlled ingress traffic
+
+---
+
+# Project Outcomes
+
+This project successfully demonstrates:
+
+✅ Production-grade Kubernetes operations  
+✅ Automated cloud-native deployments  
+✅ Secure service-to-service communication  
+✅ Canary deployment strategies  
+✅ Real-time monitoring and observability  
+✅ Infrastructure scalability and resilience  
+
+---
+
+# Key Learnings
+
+- Kubernetes enables scalable production systems
+- CI/CD automation reduces deployment risk
+- Observability is critical for reliability
+- Service mesh improves traffic control and security
+- Platform engineering requires operational thinking
+- Debugging distributed systems is an essential skill
+
+---
+
+# Future Improvements
+
+Planned enhancements include:
+
+- Terraform infrastructure provisioning
+- GitOps with ArgoCD
+- Horizontal Pod Autoscaler (HPA)
+- Distributed tracing with Jaeger
+- Multi-environment deployments
+- Policy enforcement with OPA/Gatekeeper
+
+---
+
+# Author
+
+## 👨‍💻 Ogaji Igwe Samuel
+
+GitHub: https://github.com/samklin92
+
+LinkedIn: https://linkedin.com/in/samklin92
+
+Repository: https://github.com/samklin92/kubernetes-delivery-platform.git
+
+---
+
+# Final Note
+
+This project was built to simulate how modern cloud platforms are engineered in real production environments — combining automation, security, scalability, observability, and operational reliability into a single Kubernetes delivery platform.
